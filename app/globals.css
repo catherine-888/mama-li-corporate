@@ -1,0 +1,149 @@
+/* ─────────────────────────────────────────────────────────────
+   Mama Li Corporate — design system
+   Ported from the prototype's <style> block. Locked-in palette:
+   "default" (warm cream + imperial jade). Other palettes from the
+   prototype's "tweaks" panel removed for production simplicity —
+   change values here to recolour.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --cream: #f5eedc;
+  --paper-deep: #ede4cc;
+  --ink: #1c1813;
+  --ink-soft: #5a524a;
+  --accent: #1f4a38;
+  --red: #1f4a38; /* legacy alias of --accent */
+  --jade: #3a6b53;
+  --gold: #c99846;
+  --rule: #d9cfb6;
+  --alert: #b43e2e;
+
+  --font-serif: 'Newsreader', serif;
+  --font-sans: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--cream);
+}
+
+a {
+  color: inherit;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
+}
+
+@keyframes shake {
+  0%,
+  100% {
+    transform: translateX(0);
+  }
+  20%,
+  60% {
+    transform: translateX(-4px);
+  }
+  40%,
+  80% {
+    transform: translateX(4px);
+  }
+}
+.shake {
+  animation: shake 360ms ease;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 999px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+}
+
+/* Chinese-paper texture sitting under everything */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.6;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(31, 74, 56, 0.04) 0, transparent 28%),
+    radial-gradient(circle at 88% 78%, rgba(201, 152, 70, 0.05) 0, transparent 32%),
+    radial-gradient(circle at 50% 50%, rgba(28, 24, 19, 0.015) 0, transparent 60%);
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.04;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><g fill='none' stroke='%231F4A38' stroke-width='0.7'><circle cx='60' cy='60' r='14'/><rect x='53' y='53' width='14' height='14' transform='rotate(45 60 60)'/></g></svg>");
+  background-size: 240px 240px;
+}
+
+/* Subtle ornament ambient on all screens — matches prototype's
+   `data-ornaments="subtle"` default. */
+
+/* Site wrapper sits above ornaments */
+#__next,
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* Mobile-first guards on screens designed for ≥1100px */
+@media (max-width: 900px) {
+  .desktop-only {
+    display: none !important;
+  }
+}
+@media (min-width: 901px) {
+  .mobile-only {
+    display: none !important;
+  }
+}
