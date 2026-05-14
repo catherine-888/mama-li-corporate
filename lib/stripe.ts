@@ -28,7 +28,7 @@ type StripeClient = {
 };
 
 export const stripe: StripeClient = hasRealKey
-  ? (new Stripe(key, { apiVersion: '2024-09-30.acacia' }) as unknown as StripeClient)
+  ? (new Stripe(key, { apiVersion: '2025-02-24.acacia' }) as unknown as StripeClient)
   : {
       checkout: {
         sessions: {
