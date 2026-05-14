@@ -50,3 +50,6 @@ export const FROM_ADDRESS =
 
 export const INBOX_ADDRESS =
   process.env.ORDERS_INBOX_EMAIL ?? 'orders@mamali.co.uk';
+
+// Old name — kept as alias so callers using `OPS_INBOX` still work.
+export const OPS_INBOX = INBOX_ADDRESS;
