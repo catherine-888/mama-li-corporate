@@ -23,7 +23,7 @@ type StripeClient = {
       payload: string | Buffer,
       header: string | Buffer | string[],
       secret: string
-    ) => unknown;
+    ) => Stripe.Event;
   };
 };
 
