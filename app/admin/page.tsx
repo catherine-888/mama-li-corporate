@@ -66,11 +66,11 @@ async function fetchStats(): Promise<Stats> {
       upcomingDeliveriesCount: 5,
       weeklyOrders,
       topItems: [
-        { id: 'b-lunch-rice', name: 'Rice Box Lunch', qty: 412, revenue: 5974 },
-        { id: 'b-canape-classic', name: 'Reception Canapés', qty: 240, revenue: 4320 },
+       { id: 'b-platter-feast', name: 'Hong Kong Feast', qty: 62, revenue: 19840 },
         { id: 'b-platter-classic', name: 'Classic Siu Mei Platter', qty: 98, revenue: 18130 },
-        { id: 'b-platter-feast', name: 'Hong Kong Feast', qty: 62, revenue: 19840 },
+        { id: 'b-lunch-rice', name: 'Rice Box Lunch', qty: 412, revenue: 5974 },
         { id: 'b-platter-veg', name: 'Garden Platter', qty: 37, revenue: 5365 },
+        { id: 'b-canape-classic', name: 'Reception Canapés', qty: 240, revenue: 4320 },
       ],
       repeatRate: 64,
     };
@@ -301,9 +301,10 @@ export default async function AdminDashboardPage() {
             <p style={{ fontSize: 13, color: '#5a524a', margin: 0 }}>No paid orders in the last 90 days.</p>
           ) : (
             <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-              {stats.topItems.map((it, i) => {
-                const max = stats.topItems[0].revenue;
-                const pct = max === 0 ? 0 : (it.revenue / max) * 100;
+              {(() => {
+                const maxRevenue = Math.max(...stats.topItems.map((x) => x.revenue), 1);
+                return stats.topItems.map((it, i) => {
+                  const pct = Math.min(100, (it.revenue / maxRevenue) * 100);
                 return (
                   <li
                     key={it.id}
@@ -316,6 +317,7 @@ export default async function AdminDashboardPage() {
                       alignItems: 'center',
                       fontSize: 13,
                       borderBottom: i === stats.topItems.length - 1 ? 'none' : '1px solid #f1efe8',
+                      overflow: 'hidden',
                     }}
                   >
                     <div
@@ -339,7 +341,8 @@ export default async function AdminDashboardPage() {
                     </span>
                   </li>
                 );
-              })}
+                });
+              })()}
             </ul>
           )}
         </Card>
