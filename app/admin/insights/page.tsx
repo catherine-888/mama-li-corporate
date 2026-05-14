@@ -269,7 +269,7 @@ function RankList({
         <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
           {rows.map((r, i) => {
             const val = valueKey === 'items' ? r.items ?? 0 : r.revenue;
-            const pct = (val / max) * 100;
+            const pct = Math.min(100, (val / max) * 100);
             return (
               <li
                 key={r.key}
@@ -282,6 +282,7 @@ function RankList({
                   alignItems: 'center',
                   fontSize: 13,
                   borderBottom: i === rows.length - 1 ? 'none' : '1px solid #f1efe8',
+                  overflow: 'hidden',
                 }}
               >
                 <div
